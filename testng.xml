@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="FlightBook – BlazeDemo Suite"
+       verbose="1"
+       thread-count="2"
+       parallel="methods">
+
+    <listeners>
+        <listener class-name="com.flightbook.listeners.TestListener"/>
+    </listeners>
+
+    <!-- Module 1: Flight Search -->
+    <test name="Flight Search Tests">
+        <classes>
+            <class name="com.flightbook.tests.FlightSearchTest">
+                <methods>
+                    <include name="testFlightSearchLoadsResults"/>
+                    <include name="testFlightListHasResults"/>
+                    <include name="testFlightRowColumnsVisible"/>
+                    <include name="testSameCitySearch"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Module 2: Flight Selection -->
+    <test name="Flight Selection Tests">
+        <classes>
+            <class name="com.flightbook.tests.FlightSelectionTest">
+                <methods>
+                    <include name="testChooseFlightNavigatesToPurchase"/>
+                    <include name="testPurchaseFormShowsFlightDescription"/>
+                    <include name="testPurchaseFormShowsPrice"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Module 3: Purchase Form -->
+    <test name="Purchase Tests">
+        <classes>
+            <class name="com.flightbook.tests.PurchaseTest">
+                <methods>
+                    <include name="testPurchaseWithValidData"/>
+                    <include name="testConfirmationShowsBookingId"/>
+                    <include name="testConfirmationThankYouMessage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Module 4: Different Routes -->
+    <test name="Different Route Tests">
+        <classes>
+            <class name="com.flightbook.tests.DifferentRouteTest">
+                <methods>
+                    <include name="testEachRouteLoadsResults"/>
+                    <include name="testFlightCountDiffersBetweenRoutes"/>
+                    <include name="testFlightListPageTitle"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Module 5: Form Validations -->
+    <test name="Form Validation Tests">
+        <classes>
+            <class name="com.flightbook.tests.FormValidationTest">
+                <methods>
+                    <include name="testEmptyNameValidation"/>
+                    <include name="testInvalidCreditCardNumber"/>
+                    <include name="testAllEmptyFieldsValidation"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

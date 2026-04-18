@@ -1,0 +1,22 @@
+[
+  {
+    "departure": "Boston",
+    "destination": "London",
+    "description": "Boston to London"
+  },
+  {
+    "departure": "Portland",
+    "destination": "Berlin",
+    "description": "Portland to Berlin"
+  },
+  {
+    "departure": "San Diego",
+    "destination": "Dublin",
+    "description": "San Diego to Dublin"
+  },
+  {
+    "departure": "Mexico City",
+    "destination": "Cairo",
+    "description": "Mexico City to Cairo"
+  }
+]

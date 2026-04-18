@@ -1,192 +1,81 @@
-# FlightBook-Automation-Framework
-FlightBook Automation Framework – A Selenium + Java TestNG framework built using Page Object Model (POM) to automate end-to-end testing of a flight booking web application with reporting, retry logic, and scalable design.
+# FlightBook – BlazeDemo Flight Automation Framework
 
+## AUT
+**URL:** https://blazedemo.com  
+**No backend setup needed** — live demo site, no registration required
 
-# ✈️ FlightBook – Selenium Test Automation Framework
+## Tech Stack
+| Tool | Version |
+|---|---|
+| Java | 11+ |
+| Selenium | 4.18.1 |
+| TestNG | 7.9.0 |
+| WebDriverManager | 5.7.0 |
+| ExtentReports | 5.1.1 |
+| Apache POI | 5.2.5 (Excel) |
+| Jackson | 2.16.1 (JSON) |
 
-## 🚀 Overview
-
-FlightBook is a **Selenium + Java Test Automation Framework** built using **Page Object Model (POM)** and **TestNG** to automate end-to-end testing of a flight booking web application.
-
-It follows **industry best practices** like reusable design, data-driven testing, reporting, and failure handling.
-
----
-
-## 🎯 Objective
-
-Automate complete flight booking workflow:
-
-* Flight search
-* Flight listing validation
-* Flight selection
-* Passenger form submission
-* Booking confirmation
-* Form validation scenarios
-
----
-
-## 🧱 Tech Stack
-
-* Java
-* Selenium WebDriver
-* TestNG
-* Maven
-* WebDriverManager
-* ExtentReports
-
----
-
-## 🏗️ Project Structure
-
+## Project Structure
 ```
-FlightBookFramework/
-│
-├── src/main/java
-│   ├── pages/              # Page classes (POM)
-│   ├── utils/              # Utilities (ConfigReader, Waits)
-│   ├── base/               # BasePage (common methods)
-│
-├── src/test/java
-│   ├── tests/              # Test classes
-│   ├── listeners/          # Screenshot + reporting
-│   ├── dataproviders/      # Test data
-│
-├── src/test/resources
-│   ├── config.properties   # Configurations
-│
-├── testng.xml              # Test suite
-├── pom.xml                 # Maven dependencies
+FlightBook/
+├── pom.xml
+├── testng.xml
+├── screenshots/              ← auto-created on failure
+├── test-output/
+│   └── FlightBookReport.html ← auto-generated after run
+└── src/
+    ├── main/java/com/flightbook/
+    │   ├── config/ConfigReader.java
+    │   ├── pages/
+    │   │   ├── BasePage.java
+    │   │   ├── HomePage.java
+    │   │   ├── FlightListPage.java
+    │   │   ├── PurchasePage.java
+    │   │   └── ConfirmationPage.java
+    │   ├── utils/
+    │   │   ├── DriverManager.java
+    │   │   ├── ScreenshotUtil.java
+    │   │   ├── ExtentReportManager.java
+    │   │   └── RetryAnalyzer.java
+    │   └── listeners/TestListener.java
+    └── test/
+        ├── java/com/flightbook/
+        │   ├── dataproviders/TestDataProvider.java
+        │   └── tests/
+        │       ├── BaseTest.java
+        │       ├── FlightSearchTest.java    ← Module 1
+        │       ├── FlightSelectionTest.java ← Module 2
+        │       ├── PurchaseTest.java        ← Module 3
+        │       ├── DifferentRouteTest.java  ← Module 4
+        │       └── FormValidationTest.java  ← Module 5
+        └── resources/
+            ├── config.properties
+            ├── flightRoutes.json
+            └── testdata.xlsx (FlightRoutes + PassengerData sheets)
 ```
 
----
+## Eclipse Setup
+1. File → Import → Maven → Existing Maven Projects → browse to FlightBook
+2. Right-click pom.xml → Maven → Update Project (Alt+F5)
+3. Run: `mvn test`
 
-## ✨ Key Features
+## Test Count Breakdown
+| Module | Tests | Data Source |
+|---|---|---|
+| 1 – Flight Search | 4+4 (Excel data-driven) | testdata.xlsx FlightRoutes |
+| 2 – Flight Selection | 3 | inline |
+| 3 – Purchase Form | 2+1 (Excel data-driven) | testdata.xlsx PassengerData |
+| 4 – Different Routes | 4+2 (JSON data-driven) | flightRoutes.json |
+| 5 – Form Validations | 1+3+1 (inline DataProvider) | inline |
 
-### ✅ Page Object Model (POM)
-
-* Separate classes for each page:
-
-  * HomePage
-  * FlightListPage
-  * PurchasePage
-  * ConfirmationPage
-
----
-
-### ✅ Data-Driven Testing
-
-* Uses `@DataProvider` for multiple test inputs
-
----
-
-### ✅ Configuration Management
-
-* Centralized config using `config.properties`
-* No hardcoded values
-
----
-
-### ✅ Smart Wait Strategy
-
-* Uses `WebDriverWait`
-* No `Thread.sleep()`
-
----
-
-### ✅ Retry Mechanism
-
-* Failed tests are retried using `IRetryAnalyzer`
-
----
-
-### ✅ Screenshot on Failure
-
-* Automatically captured using TestNG Listener
-* Stored in `/screenshots/`
-
----
-
-### ✅ Test Reporting
-
-* ExtentReports generates HTML reports
-* Includes:
-
-  * Test status
-  * Logs
-  * Screenshots on failure
-
----
-
-## 🧪 Test Modules
-
-### 🔹 Flight Search
-
-* Search flights using source and destination
-* Validate results and columns
-
-### 🔹 Flight Selection
-
-* Select flight and verify navigation
-* Validate flight details
-
-### 🔹 Purchase Flow
-
-* Fill passenger details
-* Submit form
-* Verify confirmation
-
-### 🔹 Multiple Route Testing
-
-* Test different city combinations
-* Validate dynamic results
-
-### 🔹 Form Validation
-
-* Empty field validation
-* Invalid input handling
-
----
-
-## ⚙️ Configuration
-
-Example `config.properties`:
-
-```
-base.url=https://blazedemo.com
-browser=chrome
-timeout=15
-headless=false
-```
-
----
-
-## ▶️ How to Run
-
-### Using Maven:
-
-```
-mvn clean test
-```
-
-### Using TestNG:
-
-Run `testng.xml`
-
----
-
-## 📸 Reports & Screenshots
-
-* Reports: `test-output/`
-* Screenshots: `/screenshots/`
-
----
-
-## 💡 Best Practices Followed
-
-* Clean POM design
-* No hardcoded values
-* Reusable methods
-* Proper waits
-* Scalable framework structure
-
---
+## Key Design Rules
+| Rule | How enforced |
+|---|---|
+| No Thread.sleep() | WebDriverWait + FluentWait only |
+| No hardcoded values | config.properties + testdata.xlsx + flightRoutes.json |
+| No WebDriver in tests | DriverManager + BaseTest |
+| POM enforced | All By.* locators in Page classes only |
+| Data-driven | Excel (FlightRoutes, PassengerData) + JSON (flightRoutes.json) |
+| Screenshot on failure | TestListener auto-captures with timestamp |
+| Parallel execution | thread-count="2" parallel="methods" |
+| Retry on failure | RetryAnalyzer (1 retry per test) |
