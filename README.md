@@ -189,23 +189,4 @@ Run `testng.xml`
 * Proper waits
 * Scalable framework structure
 
----
-
-## 🚀 Future Enhancements
-
-* Parallel execution
-* CI/CD integration (Jenkins/GitHub Actions)
-* Excel/JSON data-driven testing
-* Headless execution
-
----
-
-## 👨‍💻 Author
-
-Manoj
-
----
-
-## ⭐ Support
-
-If you found this useful, give it a ⭐ and fork the repo!
+--
